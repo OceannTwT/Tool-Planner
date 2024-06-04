@@ -15,7 +15,7 @@ def chat_completion_request(key, messages, functions=None, function_call=None, m
         "presence_penalty": 0,
         **args
     }
-    print(json_data)
+    # print(json_data)
     if stop is not None:
         json_data.update({"stop": stop})
     if functions is not None:
@@ -59,4 +59,5 @@ class GPTFactory:
     def predict(self, **gpt_args):
         print(gpt_args)
         json_data = chat_completion_request(self.openai_key, self.conversation_history, **gpt_args)
-        print(json_data)
+        self.conversation_history.append({"role": "assistant", "content": json_data["choices"][0]["message"]["content"]})
+        print(json_data["choices"][0]["message"]["content"])

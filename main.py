@@ -27,6 +27,9 @@ def test_gptfactory():
     factory.set_default_conv()
     factory.add_conv(messages)
     factory.predict(**gpt_args)
+    messages["content"] = "So how do i find it?"
+    factory.add_conv(messages)
+    factory.predict(**gpt_args)
 
 
 if __name__ == '__main__':
