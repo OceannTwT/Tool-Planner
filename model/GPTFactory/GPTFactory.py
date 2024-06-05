@@ -1,6 +1,7 @@
 import json
 import argparse
 import openai
+import time
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 import os
 
@@ -44,9 +45,23 @@ class GPTFactory:
         self.model = model
         self.conversation_history = []
         self.openai_key = openai_key
+        self.TRY_TIME=6
+        self.time = time.time()
 
     def add_conv(self, conv):
         self.conversation_history.append(conv)
+
+    def set_key(self, openai_key):
+        self.openai_key = openai_key
+
+    def set_sys_conv(self, sys_prompt):
+        self.conversation_history = [
+            {"role":"system","content":sys_prompt}
+        ]
+    
+    def add_user_conv(self, user_prompt):
+        message = {"role":"user","content":user_prompt}
+        self.conversation_history.append(message)
 
     def set_default_conv(self):
         self.conversation_history = [
@@ -56,8 +71,22 @@ class GPTFactory:
     def change_conv(self,conv):
         self.conversation_history = conv
 
+    def clear_conv(self):
+        self.conversation_history = []
+
     def predict(self, **gpt_args):
-        print(gpt_args)
-        json_data = chat_completion_request(self.openai_key, self.conversation_history, **gpt_args)
-        self.conversation_history.append({"role": "assistant", "content": json_data["choices"][0]["message"]["content"]})
-        print(json_data["choices"][0]["message"]["content"])
+        # print(gpt_args)
+        self.time = time.time()
+        for _ in range(self.TRY_TIME):
+            if _ != 0:
+                time.sleep(15)
+            json_data = chat_completion_request(self.openai_key, self.conversation_history, **gpt_args)
+            try:
+                self.conversation_history.append({"role": "assistant", "content": json_data["choices"][0]["message"]["content"]})
+                return json_data["choices"][0]["message"]["content"]
+            except BaseException as e:
+                print(f"Parsing Exception: {repr(e)}. Try again.")
+                if json_data is not None:
+                    print(f"OpenAI return: {json_data}")
+
+            
