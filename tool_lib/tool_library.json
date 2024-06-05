@@ -21,4 +21,3 @@
 {"functionality": "This tool, listoforders, provides an API endpoint for retrieving a list of orders from the mktplace.eu platform. The API supports a GET request with parameters for action (default is orders_list) and status. The response will include order information in JSON format.", "id": 23, "name": "listoforders"}
 {"functionality": "The Profile API provides a way to retrieve user details from a specified endpoint using a GET request. The API requires specific headers for authentication and returns user data in JSON format upon successful retrieval.", "id": 24, "name": "Profile"}
 {"functionality": "The Recommendations tool provides an API that allows users to retrieve recommendations related to products, customers, and accounts within a given context. It offers a GET request to receive a list of recommendations by consuming various APIs associated with product, customer, and account data.", "id": 25, "name": "Recommendations"}
-

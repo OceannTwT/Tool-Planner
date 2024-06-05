@@ -4,10 +4,12 @@ import logging
 from tqdm import tqdm 
 from config import args
 from utils import print_exp
-from src.toolkits.loader import ToolkitParser
+from scipy.spatial.distance import cosine
+from src.toolkits.loader import ToolkitParser, ToolkitList
 from model.GPTFactory.GPTFactory import GPTFactory
+from model.Simcse.sim import ToolEmb
 from src.toolkits.preprocessing import find_json_files, list_directories, ToolProcessor
-
+from transformers import AutoModel, AutoTokenizer
 
 def test_loader():
     name = "123"
@@ -18,6 +20,14 @@ def test_loader():
     toolkit.loads_toolkit(dic, 0)
     # print(toolkit.get_description())
     toolkit.tool_exp()
+
+    tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    toolsim = ToolEmb(tokenizer, model)
+    toolsim.compute_tool_emb(args.tool_output_file)
+    toolkit_list = ToolkitList(toolsim, 10)
+    toolkit_list.generate_toolkit()
+    print("Labels:\n", toolkit_list.kmeans.labels_)
 
 def test_gptfactory():
     factory = GPTFactory("gpt-3.5-turbo", "sk-bm-YImlouVDbMgMQ87eOWzBT3BlbkFJPImmmDgc4MaSwuKLbGGk")
@@ -44,8 +54,21 @@ def test_preprocessing():
     #     toolp.tools_list[idx].fetch_func()
     toolp.dumps()
 
+def test_toolsim():
+    tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    toolsim = ToolEmb(tokenizer, model)
+    toolsim.compute_tool_emb(args.tool_output_file)
+    print(toolsim.tool_emb[0].numpy())
+    # cosine_sim_0_1 = 1 - cosine(toolsim.tool_emb[0], toolsim.tool_emb[1])
+    # cosine_sim_0_2 = 1 - cosine(toolsim.tool_emb[0], toolsim.tool_emb[2])
+
+    # print("Cosine similarity between \"%s\" and \"%s\" is: %.3f" % (toolsim.tool_func[0], toolsim.tool_func[1], cosine_sim_0_1))
+    # print("Cosine similarity between \"%s\" and \"%s\" is: %.3f" % (toolsim.tool_func[0], toolsim.tool_func[2], cosine_sim_0_2))
+
+
 
 if __name__ == '__main__':
-    test_preprocessing()
-
+    test_loader()
+    
     pass

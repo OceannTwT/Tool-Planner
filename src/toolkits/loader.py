@@ -1,7 +1,37 @@
 import json
 import argparse
 import os
+from sklearn.cluster import KMeans
+from src.toolkits.preprocessing import ToolAPI
+from model.Simcse.sim import ToolEmb
 
+class ToolkitList:
+    def __init__(self, ToolEmb=None, toolkit_num=1):
+        self.tool_emb = ToolEmb
+        self.tool_kits = []
+        self.tool_kit_num = toolkit_num
+        self.kmeans = None
+
+    def generate_toolkit(self):
+        emb_list = []
+        for idx, emb in enumerate(self.tool_emb.tool_emb):
+            emb_arr = emb.numpy()
+            emb_list.append(emb_arr)
+        self.kmeans = KMeans(n_clusters=self.tool_kit_num, random_state=0).fit(emb_list)
+        for i in range(self.tool_kit_num):
+            self.tool_kits.append(ToolkitParser("", "", i))
+        for idx in range(len(self.tool_emb.tool_emb)):
+            tool_json = self.tool_emb.tool_rebuild_json
+            self.tool_kits[self.kmeans.labels_[idx]].tool_lists.append(ToolAPI(tool_json["id"],
+                                                                               tool_json["desc"],
+                                                                               tool_json["name"],
+                                                                               tool_json["p_name"],
+                                                                               tool_json["api_doc"],
+                                                                               tool_json["functionality"]
+                                                                               ))
+
+
+    
 class ToolkitParser:
     def __init__(self, toolkit_description="", toolkit_name="", toolkit_id=0):
         self.toolkit_id = toolkit_id
