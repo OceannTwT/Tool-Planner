@@ -21,16 +21,19 @@ def test_loader():
     # print(toolkit.get_description())
     toolkit.tool_exp()
 
-    tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
-    model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
-    toolsim = ToolEmb(tokenizer, model)
-    toolsim.compute_tool_emb(args.tool_output_file)
+    # tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    # model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    # toolsim = ToolEmb(tokenizer, model)
+    # toolsim.compute_tool_emb(args.tool_output_file)
+    toolsim = ToolEmb()
+    toolsim.rebuild_json(args.toolkit_output_file)
     toolkit_list = ToolkitList(toolsim, 10)
     toolkit_list.generate_toolkit()
     print("Labels:\n", toolkit_list.labels)
     for idx, tool in enumerate(toolkit_list.tool_kits[1].tool_lists):
         print(tool.get_desc(), tool.tool_id)
-    print(toolkit_list.tool_kits[1].get_description())
+    print(toolkit_list.tool_kits[1].generate_description())
+    # toolkit_list.dumps()
     # toolkit_list.tool_kits[0].tool_list
 
 def test_gptfactory():

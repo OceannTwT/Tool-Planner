@@ -28,14 +28,15 @@ def list_directories(path):
         return []
 
 class ToolAPI:
-    def __init__(self, tool_id, desc, name, p_name, api_doc, func="", toolkit=-1):
+    def __init__(self, tool_id, desc, name, p_name, api_doc, func="", toolkit=-1, toolkit_fun=""):
         self.p_name = p_name
         self.desc = desc 
         self.name = name
         self.api_doc = api_doc
         self.tool_id = tool_id
         self.func = func
-        self.toolkit = -1
+        self.toolkit = toolkit
+        self.toolkit_fun = toolkit_fun
 
     def get_api_doc(self):
         return self.api_doc
@@ -68,7 +69,8 @@ class ToolAPI:
                      "p_name": self.p_name,
                      "desc": self.desc,
                      "api_doc": self.api_doc,
-                     "toolkit": self.toolkit
+                     "toolkit": self.toolkit,
+                     "toolkit_fun": self.toolkit_fun
                      }
         json_data = json.dumps(data)
         return json_data
