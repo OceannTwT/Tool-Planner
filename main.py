@@ -27,7 +27,11 @@ def test_loader():
     toolsim.compute_tool_emb(args.tool_output_file)
     toolkit_list = ToolkitList(toolsim, 10)
     toolkit_list.generate_toolkit()
-    print("Labels:\n", toolkit_list.kmeans.labels_)
+    print("Labels:\n", toolkit_list.labels)
+    for idx, tool in enumerate(toolkit_list.tool_kits[1].tool_lists):
+        print(tool.get_desc(), tool.tool_id)
+    print(toolkit_list.tool_kits[1].get_description())
+    # toolkit_list.tool_kits[0].tool_list
 
 def test_gptfactory():
     factory = GPTFactory("gpt-3.5-turbo", "sk-bm-YImlouVDbMgMQ87eOWzBT3BlbkFJPImmmDgc4MaSwuKLbGGk")
