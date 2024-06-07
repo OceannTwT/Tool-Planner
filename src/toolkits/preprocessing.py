@@ -44,6 +44,10 @@ class ToolAPI:
     def get_api_doc(self):
         return self.api_doc
     
+    def get_api_tot_name(self):
+        name_str = self.api_dest["type_name"] + "." + self.api_dest["package_name"] + "." + self.api_dest["name"]
+        return name_str
+    
     def get_desc(self):
         return self.api_dest["desc"]
     
@@ -73,6 +77,7 @@ class ToolAPI:
                      "toolkit": self.toolkit,
                      "toolkit_fun": self.toolkit_fun
                      }
+        print(data)
         json_data = json.dumps(data)
         return json_data
     

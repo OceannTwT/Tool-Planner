@@ -25,7 +25,8 @@ class ToolkitList:
                 need_kmeans = True
             if tool_json["toolkit_fun"] is "":
                 has_toolkit_func = False
-        
+        print(need_kmeans, has_toolkit_func)
+
         if need_kmeans:
             emb_list = []
             for idx, emb in enumerate(self.tool_emb.tool_emb):
@@ -41,12 +42,10 @@ class ToolkitList:
             self.labels.append(toolkit_id)
             toolkit_func = "" if need_kmeans else tool_json["toolkit_fun"]
             self.tool_kits[toolkit_id].add_tool(ToolAPI(tool_json["id"],
-                                                        tool_json["desc"],
-                                                        tool_json["name"],
-                                                        tool_json["p_name"],
+                                                        tool_json["api_dest"],
                                                         tool_json["api_doc"],
                                                         tool_json["functionality"],
-                                                        toolkit_id,
+                                                        int(toolkit_id),
                                                         toolkit_func
                                                         ))
             if has_toolkit_func and not need_kmeans:
@@ -62,7 +61,7 @@ class ToolkitList:
     
     def dumps(self):
         for idx in range(self.tool_kit_num):
-            self.tool_kits[idx].generate_description()
+            # self.tool_kits[idx].generate_description()
             self.tool_kits[idx].dumps()
 
     
@@ -85,7 +84,7 @@ class ToolkitParser:
             gpt_fact.set_sys_conv(system)
             tool_list_str = "{"
             for tool in self.tool_lists:
-                tool_list_str = tool_list_str + f"[API{tool.tool_id} {tool.name}, Functionality: {tool.func}], "
+                tool_list_str = tool_list_str + f"[API{tool.tool_id} {tool.api_dest['type_name']}.{tool.api_dest['package_name']}.{tool.api_dest['name']}, Functionality: {tool.func}], "
             tool_list_str = tool_list_str + "}"
             print(tool_list_str)
             user = user.replace("{tool_list}", tool_list_str)
