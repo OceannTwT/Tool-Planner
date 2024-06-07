@@ -11,6 +11,9 @@ from model.Simcse.sim import ToolEmb
 from src.toolkits.preprocessing import find_json_files, list_directories, ToolProcessor
 from transformers import AutoModel, AutoTokenizer
 
+def test_planner():
+    pass
+
 def test_loader():
     name = "123"
     desc = "happy every day"
@@ -19,7 +22,7 @@ def test_loader():
     toolkit = ToolkitParser()
     toolkit.loads_toolkit(dic, 0)
     # print(toolkit.get_description())
-    toolkit.tool_exp()
+    toolkit.toolkit_exp()
 
     # tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
     # model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
@@ -33,6 +36,7 @@ def test_loader():
     for idx, tool in enumerate(toolkit_list.tool_kits[1].tool_lists):
         print(tool.get_desc(), tool.tool_id)
     print(toolkit_list.tool_kits[1].generate_description())
+    toolkit_list.tool_kits[1].toolkit_exp()
     # toolkit_list.dumps()
     # toolkit_list.tool_kits[0].tool_list
 
@@ -76,6 +80,6 @@ def test_toolsim():
 
 
 if __name__ == '__main__':
-    test_loader()
+    test_planner()
     
     pass

@@ -40,15 +40,15 @@ class ToolkitList:
             toolkit_id = self.kmeans.labels_[idx] if need_kmeans else tool_json["toolkit"]
             self.labels.append(toolkit_id)
             toolkit_func = "" if need_kmeans else tool_json["toolkit_fun"]
-            self.tool_kits[toolkit_id].tool_lists.append(ToolAPI(tool_json["id"],
-                                                                               tool_json["desc"],
-                                                                               tool_json["name"],
-                                                                               tool_json["p_name"],
-                                                                               tool_json["api_doc"],
-                                                                               tool_json["functionality"],
-                                                                               toolkit_id,
-                                                                               toolkit_func
-                                                                               ))
+            self.tool_kits[toolkit_id].add_tool(ToolAPI(tool_json["id"],
+                                                        tool_json["desc"],
+                                                        tool_json["name"],
+                                                        tool_json["p_name"],
+                                                        tool_json["api_doc"],
+                                                        tool_json["functionality"],
+                                                        toolkit_id,
+                                                        toolkit_func
+                                                        ))
             if has_toolkit_func and not need_kmeans:
                 self.tool_kits[toolkit_id].toolkit_description = toolkit_func
         # for idx in range(self.tool_kit_num):
@@ -109,7 +109,7 @@ class ToolkitParser:
     def add_tool(self, tool_args):
         self.tool_lists.append(tool_args)
 
-    def tool_exp(self):
+    def toolkit_exp(self):
         print(f"|| Toolkit {self.toolkit_id}, Name:[{self.toolkit_name}], Desc[{self.toolkit_description}] ||")
         return
     
