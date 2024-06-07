@@ -26,12 +26,15 @@ def list_directories(path):
     except Exception as e:
         print(f"Error: {e}")
         return []
+    
+def convert_to_snake_case(s):
+    s = s.lower()
+    s = s.replace(' ', '_')
+    return s
 
 class ToolAPI:
-    def __init__(self, tool_id, desc, name, p_name, api_doc, func="", toolkit=-1, toolkit_fun=""):
-        self.p_name = p_name
-        self.desc = desc 
-        self.name = name
+    def __init__(self, tool_id, api_dest, api_doc, func="", toolkit=-1, toolkit_fun=""):
+        self.api_dest = api_dest
         self.api_doc = api_doc
         self.tool_id = tool_id
         self.func = func
@@ -42,7 +45,7 @@ class ToolAPI:
         return self.api_doc
     
     def get_desc(self):
-        return self.desc
+        return self.api_dest["desc"]
     
     def fetch_func(self):
         if self.func is not "":
@@ -53,9 +56,9 @@ class ToolAPI:
         system = FORMAT_TOOL_FUNCTIONARITY_FUNCTION
         user = FORMAT_TOOL_FUNCTIONARITY_USER_FUNCTION
         gpt_fact.set_sys_conv(system)
-        user = user.replace("{tool_name}",self.name)
-        user = user.replace("{pack_name}",self.p_name)
-        user = user.replace("{tool_description}", self.desc)
+        user = user.replace("{tool_name}",self.api_dest["name"])
+        user = user.replace("{pack_description}",self.api_dest["package_desc"])
+        user = user.replace("{tool_description}", self.api_dest["desc"])
         user = user.replace("{api_doc}", str(self.api_doc))
         # print(user)
         gpt_fact.add_user_conv(user)
@@ -65,9 +68,7 @@ class ToolAPI:
     def dumps(self):
         data = {"functionality": self.func, 
                      "id": self.tool_id,
-                     "name": self.name,
-                     "p_name": self.p_name,
-                     "desc": self.desc,
+                     "api_dest": self.api_dest,
                      "api_doc": self.api_doc,
                      "toolkit": self.toolkit,
                      "toolkit_fun": self.toolkit_fun
@@ -76,7 +77,7 @@ class ToolAPI:
         return json_data
     
     def exp(self):
-        print(f"API {self.tool_id}: Name [{self.name}], Desc[{self.desc}]")
+        print(f"API {self.tool_id}: Name [{self.api_dest['name']}], Desc[{self.api_dest['desc']}]")
         
 
 class ToolProcessor:
@@ -96,11 +97,17 @@ class ToolProcessor:
         id_iter = 0
         for idx, file_dir in enumerate(dir_list):
             tool_package = json.load(open(file_dir, "r"))
-            package_name = tool_package["tool_description"]
+            dir_list = file_dir.split("/")
+            type_name = dir_list[-2]
+            package_desc = tool_package["tool_description"]
+            package_name = tool_package["standardized_name"]
             for tool in tool_package["api_list"]:
                 tool_desc = tool.get("description", "")
                 tool_name = tool.get("name", "")
-                pack = ToolAPI(id_iter, tool_desc, tool_name, package_name, tool)
+                tool_name = convert_to_snake_case(tool_name)
+                api_dest = {"name": tool_name, "package_name": package_name,
+                            "type_name": type_name, "desc": tool_desc, "package_desc": package_desc}
+                pack = ToolAPI(id_iter, api_dest, tool)
                 tools.append(pack)
                 id_iter = id_iter + 1
         return tools

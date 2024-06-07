@@ -58,9 +58,9 @@ def test_preprocessing():
     dic = find_json_files(args.tool_env)
     dir = list_directories(args.tool_api_dir)
     toolp = ToolProcessor(args.tool_env)
-    toolp.tools_list[-1].exp()
-    print(toolp.tools_list[-1].fetch_func())
-    print(len(toolp.tools_list))
+    # toolp.tools_list[-1].exp()
+    # print(toolp.tools_list[-1].fetch_func())
+    # print(len(toolp.tools_list))
     # for idx, tool in tqdm(enumerate(toolp.tools_list)):
     #     toolp.tools_list[idx].fetch_func()
     toolp.dumps()
@@ -80,6 +80,6 @@ def test_toolsim():
 
 
 if __name__ == '__main__':
-    test_planner()
+    test_preprocessing()
     
     pass

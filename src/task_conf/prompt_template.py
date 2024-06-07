@@ -9,7 +9,7 @@ only describing the API functionality.
 
 FORMAT_TOOL_FUNCTIONARITY_USER_FUNCTION = """
 Tool Name: {tool_name}.
-Tool Description: {pack_name},{tool_description}.
+Tool Description: {pack_description},{tool_description}.
 API documentation:: {api_doc}.
 Please remember, tell me the functionality of this tool without outputting unnecessary information,
 ONLY describing the API functionality in short description.
