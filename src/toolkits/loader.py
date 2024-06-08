@@ -25,7 +25,7 @@ class ToolkitList:
                 need_kmeans = True
             if tool_json["toolkit_fun"] is "":
                 has_toolkit_func = False
-        print(need_kmeans, has_toolkit_func)
+        # print(need_kmeans, has_toolkit_func)
 
         if need_kmeans:
             emb_list = []
@@ -61,7 +61,7 @@ class ToolkitList:
     
     def dumps(self):
         for idx in range(self.tool_kit_num):
-            # self.tool_kits[idx].generate_description()
+            self.tool_kits[idx].generate_description()
             self.tool_kits[idx].dumps()
 
     
@@ -86,7 +86,7 @@ class ToolkitParser:
             for tool in self.tool_lists:
                 tool_list_str = tool_list_str + f"[API{tool.tool_id} {tool.api_dest['type_name']}.{tool.api_dest['package_name']}.{tool.api_dest['name']}, Functionality: {tool.func}], "
             tool_list_str = tool_list_str + "}"
-            print(tool_list_str)
+            # print(tool_list_str)
             user = user.replace("{tool_list}", tool_list_str)
             gpt_fact.add_user_conv(user)
             self.toolkit_description = gpt_fact.predict()
@@ -109,8 +109,8 @@ class ToolkitParser:
         self.tool_lists.append(tool_args)
 
     def toolkit_exp(self):
-        print(f"|| Toolkit {self.toolkit_id}, Name:[{self.toolkit_name}], Desc[{self.toolkit_description}] ||")
-        return
+        exp = f"[Toolkit {self.toolkit_id}, Desc[{self.toolkit_description}]]\n"
+        return exp
     
     def dumps(self):
         for idx in range(len(self.tool_lists)):

@@ -8,11 +8,15 @@ from scipy.spatial.distance import cosine
 from src.toolkits.loader import ToolkitParser, ToolkitList
 from model.GPTFactory.GPTFactory import GPTFactory
 from model.Simcse.sim import ToolEmb
+from src.planner.plan import PlannerParser
 from src.toolkits.preprocessing import find_json_files, list_directories, ToolProcessor
 from transformers import AutoModel, AutoTokenizer
 
 def test_planner():
-    pass
+    parser = PlannerParser(20, args.input_query_file, args.output_answer_file)
+    print(parser.query_list[0].generate_plan())
+    parser.query_list[0].generate_steps()
+    # parser.generate_query_list()
 
 def test_loader():
     name = "123"
@@ -24,20 +28,20 @@ def test_loader():
     # print(toolkit.get_description())
     toolkit.toolkit_exp()
 
-    tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
-    model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
-    toolsim = ToolEmb(tokenizer, model)
-    toolsim.compute_tool_emb(args.tool_output_file)
-    # toolsim = ToolEmb()
-    # toolsim.rebuild_json(args.toolkit_output_file)
+    # tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    # model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    # toolsim = ToolEmb(tokenizer, model)
+    # toolsim.compute_tool_emb(args.tool_output_file)
+    toolsim = ToolEmb()
+    toolsim.rebuild_json(args.toolkit_output_file)
     toolkit_list = ToolkitList(toolsim, 20)
     toolkit_list.generate_toolkit()
     print("Labels:\n", toolkit_list.labels)
-    for idx, tool in enumerate(toolkit_list.tool_kits[1].tool_lists):
+    for idx, tool in enumerate(toolkit_list.tool_kits[13].tool_lists):
         print(tool.get_api_tot_name(), tool.tool_id)
     # print(toolkit_list.tool_kits[1].generate_description())
     # toolkit_list.tool_kits[1].toolkit_exp()
-    toolkit_list.dumps()
+    # toolkit_list.dumps()
     # toolkit_list.tool_kits[0].tool_list
 
 def test_gptfactory():
@@ -80,6 +84,6 @@ def test_toolsim():
 
 
 if __name__ == '__main__':
-    test_loader()
+    test_planner()
     
     pass

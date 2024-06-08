@@ -12,5 +12,5 @@ python main.py \
     --tool_output_file tool_lib/tool_library.json \
     --toolkit_output_file tool_lib/toolkit_library.json \
     --input_query_file data_example/instruction/G3_query.json \
-    --output_answer_file data_example/instruction/G3_chatgpt_dfs_inference_result \
+    --output_answer_file data_example/instruction/tool_result.json \
     --toolbench_key $TOOLBENCH_KEY

@@ -77,7 +77,7 @@ class ToolAPI:
                      "toolkit": self.toolkit,
                      "toolkit_fun": self.toolkit_fun
                      }
-        print(data)
+        # print(data)
         json_data = json.dumps(data)
         return json_data
     
