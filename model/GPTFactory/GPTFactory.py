@@ -33,6 +33,7 @@ def chat_completion_request(key, messages, functions=None, function_call=None, m
             **json_data,
         )
         json_data = json.loads(str(openai_response))
+        # print(json_data)
         return json_data 
 
     except Exception as e:
@@ -89,4 +90,18 @@ class GPTFactory:
                 if json_data is not None:
                     print(f"OpenAI return: {json_data}")
 
+    def predict_fun(self, **gpt_args):
+        # print(gpt_args)
+        self.time = time.time()
+        for _ in range(self.TRY_TIME):
+            if _ != 0:
+                time.sleep(15)
+            json_data = chat_completion_request(self.openai_key, self.conversation_history, **gpt_args)
+            try:
+                # self.conversation_history.append({"role": "assistant", "content": json_data["choices"][0]["message"]["content"]})
+                return json_data["choices"][0]["message"]["function_call"]
+            except BaseException as e:
+                print(f"Parsing Exception: {repr(e)}. Try again.")
+                if json_data is not None:
+                    print(f"OpenAI return: {json_data}")
             

@@ -16,6 +16,7 @@ def test_planner():
     parser = PlannerParser(20, args.input_query_file, args.output_answer_file)
     print(parser.query_list[0].generate_plan())
     parser.query_list[0].generate_steps()
+    parser.query_list[0].process()
     # parser.generate_query_list()
 
 def test_loader():

@@ -47,6 +47,20 @@ Only give the plan in the format and DO NOT generate unnecessary information.
 Here is the user’s question: {user_query}.
 """
 
+PROMPT_OF_CALLING_ONE_TOOL_SYSTEM = """
+
+You are Tool-GPT, and you can solve specific problems using given tools (functions).
+You will receive a problem description and the specific method of function calls to execute the solution from the toolkit. 
+By invoking this API, you can obtain the results of the thought process regarding this part of the problem. 
+Task description: {task_description}.
+
+"""
+
+PROMPT_OF_CALLING_ONE_TOOL_USER = """
+Thought: {thought_text}.
+Provide the accurate API input and message as you can!
+"""
+
 PROMPT_OF_PLAN_EXPLORATION = """
 Let’s begin executing this step of the plan. You will be provided with documentation for all
 the APIs contained within this step’s toolkit, along with the parameters required to call the
@@ -81,4 +95,10 @@ PROMPT_OF_THE_OUTPUTS = """
 If you believe you have obtained the result capable of answering the task, please invoke this
 function to provide the final answer. Remember: the only part displayed to the user is the
 final answer, so it should contain sufficient information.
+Task_Description:{task_description}
+"""
+
+PROMPT_OF_THE_OUTPUTS_USER = """
+Resolving Procedure:{response_thought_list}
+Please provide the final answer.
 """
