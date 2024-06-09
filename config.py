@@ -3,7 +3,7 @@ import argparse
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-
+    parser.add_argument('--toolkit_num', type=int, default=1, required=False, help='numbers of toolkits')
     parser.add_argument('--backbone_model', type=str, default="toolllama", required=False, help='chatgpt_function or davinci or toolllama')
     parser.add_argument('--openai_key', type=str, default="", required=False, help='openai key for chatgpt_function or davinci model')
     parser.add_argument('--model_path', type=str, default="your_model_path/", required=False, help='')
@@ -19,6 +19,7 @@ def parse_arguments():
     parser.add_argument('--toolbench_key', type=str, default="",required=False, help='your toolbench key to request rapidapi service')
     parser.add_argument('--rapidapi_key', type=str, default="",required=False, help='your rapidapi key to request rapidapi service')
     parser.add_argument('--api_customization', action="store_true", help="To use customized api or not.")
+
 
     parsed_args = parser.parse_args()
     return parsed_args
