@@ -7,7 +7,6 @@
 <a href="https://github.com/OceannTwT/Tool-Planner/stargazers"><img src="https://img.shields.io/github/stars/OceannTwT/Tool-Planner" alt="GitHub Stars"></a>
 </p>
 
-
 This is the official repository of the paper: [Tool-Planner: Dynamic Solution Tree Planning for Large Language Model with Tool Clustering](https://arxiv.org/abs/2406.03807)
 
 ![Framework of Tool-Planner.](assets/tool-planner.png)
