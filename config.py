@@ -11,7 +11,7 @@ def parse_arguments():
     parser.add_argument('--toolkit_dir', type=str, default="your_toolkits_path/", required=False, help='')
     parser.add_argument('--tool_env', type=str, default="your_toolenv_path/", required=False, help='')
     parser.add_argument('--observ_compress_method', type=str, default="truncate", choices=["truncate", "filter", "random"], required=False, help='observation compress method')
-    parser.add_argument('--method', type=str, default="CoT@1", required=False, help='method for answer generation: CoT@n,Reflexion@n,BFS,DFS,UCT_vote')
+    parser.add_argument('--simcse_file', type=str, default="model_lib/sup-simcse-roberta-base", required=False, help='Simcse file path')
     parser.add_argument('--tool_output_file', type=str, default="tool_lib/tool_library.json", required=False, help='Tool lib for description')
     parser.add_argument('--toolkit_output_file', type=str, default="tool_lib/toolkit_library.json", required=False, help='Toolkit lib for description')
     parser.add_argument('--input_query_file', type=str, default="", required=False, help='input path')

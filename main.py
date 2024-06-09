@@ -18,8 +18,8 @@ def generate_result():
     toolp = ToolProcessor(args.tool_env)
     toolp.dumps()
 
-    tokenizer = AutoTokenizer.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
-    model = AutoModel.from_pretrained("/root/autodl-tmp/sup-simcse-roberta-base")
+    tokenizer = AutoTokenizer.from_pretrained(args.simcse_file)
+    model = AutoModel.from_pretrained(args.simcse_file)
     toolsim = ToolEmb(tokenizer, model)
     toolsim.compute_tool_emb(args.tool_output_file)
     # toolsim = ToolEmb()
@@ -36,4 +36,3 @@ def generate_result():
 if __name__ == '__main__':
     generate_result()
     
-    pass
