@@ -73,13 +73,15 @@ python main.py \
     --toolkit_num 20 \
     --openai_key $OPENAI_KEY \
     --tool_env datas/toolenv/tools/ \
-    --tool_output_file tool_lib/tool_library.json \
-    --toolkit_output_file tool_lib/toolkit_library.json \
+    --tool_output_file tool_lib/my_tool_library.json \
+    --toolkit_output_file tool_lib/my_toolkit_library.json \
     --input_query_file data/instruction/G3_query.json \
     --output_answer_file data/instruction/tool_result.json \
     --simcse_file model_lib/sup-simcse-roberta-base \
     --toolbench_key $TOOLBENCH_KEY
 ```
+
+In the tool_lib, we provide a example of the toolkit, corresponding to the generated toolkit contents, change your output tool and toolkit file on `--toolkit_output_file` and `--tool_output_file`.
 
 ## Main Results
 
