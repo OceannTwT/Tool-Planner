@@ -52,7 +52,7 @@ model = AutoModel.from_pretrained("princeton-nlp/sup-simcse-roberta-base")
 
 ## Inference Tool-Planner
 
-Use your `ChatGPT` API and `Toolbench` API, replace the API key in run.sh, and run the following script.
+Use your `ChatGPT` API and `Toolbench` API, replace the API key in `run.sh`, and run the following script.
 
 ```shell
 bash script/run.sh
