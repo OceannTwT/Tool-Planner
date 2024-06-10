@@ -23,7 +23,7 @@ def generate_result():
     toolsim = ToolEmb(tokenizer, model)
     toolsim.compute_tool_emb(args.tool_output_file)
     # toolsim = ToolEmb()
-    toolsim.rebuild_json(args.toolkit_output_file)
+    toolsim.rebuild_json(args.tool_output_file)
     toolkit_list = ToolkitList(toolsim, args.toolkit_num)
     toolkit_list.generate_toolkit()
     toolkit_list.dumps()
