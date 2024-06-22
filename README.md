@@ -16,7 +16,7 @@ This is the official repository of the paper: [Tool-Planner: Dynamic Solution Tr
 Update your environment for the required dependency. 
 
 ```shell
-conda create --name raisf python=3.11 -y
+conda create --name tool-planner python=3.11 -y
 conda activate tool-planner
 pip install -r requirement.txt
 ```
