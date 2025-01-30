@@ -1,4 +1,4 @@
-# Tool-Planner: Dynamic Solution Tree Planning for Large Language Model with Tool Clustering
+# Tool-Planner: Task Planning with Clusters across Multiple Tools
 
 <p align="center">
 <img src='https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg'></a>
@@ -97,7 +97,7 @@ In the tool_lib, we provide a example of the toolkit, corresponding to the gener
 
 ## 🛠️Update logs
 
-
+[24/01/23] 🔥 Our paper was accepted on ICLR 2025!
 [24/06/09] 🔥 We have released the version 1.0.0 for Tool-Planner.
 
 
