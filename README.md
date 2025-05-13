@@ -107,11 +107,13 @@ If you use this codebase or Tool-Planner inspires your work, we would greatly ap
 
 ```bibtex
 
-@article{liu2024tool,
-  title={Tool-Planner: Dynamic Solution Tree Planning for Large Language Model with Tool Clustering},
-  author={Liu, Yanming and Peng, Xinyue and Zhang, Yuwei and Cao, Jiannan and Zhang, Xuhong and Cheng, Sheng and Wang, Xun and Yin, Jianwei and Du, Tianyu},
-  journal={arXiv preprint arXiv:2406.03807},
-  year={2024}
+@inproceedings{
+liu2025toolplanner,
+title={Tool-Planner: Task Planning with Clusters across Multiple Tools},
+author={Yanming Liu and Xinyue Peng and Jiannan Cao and Shi Bo and Yuwei Zhang and Xuhong Zhang and Sheng Cheng and Xun Wang and Jianwei Yin and Tianyu Du},
+booktitle={The Thirteenth International Conference on Learning Representations},
+year={2025},
+url={https://openreview.net/forum?id=dRz3cizftU}
 }
 
 ```
