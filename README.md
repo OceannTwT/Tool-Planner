@@ -25,7 +25,7 @@ pip install -r requirement.txt
 
 Use the following link to download the `Toolbench` dataset. It will be used to extract the tool calling methods and descriptions from `RapidAPI`, and to complete the subsequent setup of the Toolkit.
 
-[Google Drive](https://drive.google.com/drive/folders/1yBUQ732mPu-KclJnuQELEhtKakdXFc3J) or [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/c9e50625743b40bfbe10/)
+[Google Drive](https://drive.google.com/drive/folders/1TysbSWYpP8EioFu9xPJtpbJZMLLmwAmL) or [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/c9e50625743b40bfbe10/)
 
 * Putting the file to the main directory.
 
